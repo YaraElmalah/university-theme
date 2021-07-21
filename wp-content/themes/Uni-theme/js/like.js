@@ -20,10 +20,13 @@
       }
     }
     createLike(currentLikeBox) {
-      let LikedProfessor = currentLikeBox.data('professor');
+      let LikedProfessor = currentLikeBox.data("professor");
       $.ajax({
+        beforeSend: (xhr) => {
+          xhr.setRequestHeader("X-WP-Nonce", likes_info.nonce);
+        },
         url: uni_info.root_url + "/wp-json/university/v1/manageLike",
-        data:{'professorID' : LikedProfessor},
+        data: { professorID: LikedProfessor },
         type: "POST",
         success: (response) => {
           console.table(response);

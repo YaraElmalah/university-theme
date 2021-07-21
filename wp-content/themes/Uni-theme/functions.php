@@ -55,8 +55,10 @@ function university_files()
 		)
 	);
 	wp_enqueue_script('like-js', get_theme_file_uri('js/like.js'), array('jquery'), microtime(), true);
-	wp_localize_script('like-js', 'uni_info', array(
-		'root_url' => get_site_url()
+	wp_localize_script('like-js', 'likes_info', array(
+		'root_url' => get_site_url(),
+		'nonce' => wp_create_nonce('wp_rest'),  //this should be written as it is
+
 	));
 }
 add_action('after_setup_theme', 'university_features');

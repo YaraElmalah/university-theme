@@ -15,19 +15,21 @@ while (have_posts()) {
         <div class="two-thirds">
           <?php
           $existsStatus = 'no';
-          $existsQuery = new WP_Query(array(
-            'author' => get_current_user_id(),
-            'post_type' => 'like',
-            'meta_query' => array(
-              array(
-                'key' => 'liked_professor_id',
-                'compare' => '=',
-                'value' => get_the_ID()
+          if (is_user_logged_in()) {
+            $existsQuery = new WP_Query(array(
+              'author' => get_current_user_id(), //if the user is not logged in, then it would get all users
+              'post_type' => 'like',
+              'meta_query' => array(
+                array(
+                  'key' => 'liked_professor_id',
+                  'compare' => '=',
+                  'value' => get_the_ID()
+                )
               )
-            )
-          ));
-          if ($existsQuery->found_posts) {
-            $existsStatus = 'yes';
+            ));
+            if ($existsQuery->found_posts) {
+              $existsStatus = 'yes';
+            }
           }
           $likeCount = new WP_Query(array(
             'post_type' => 'like',
