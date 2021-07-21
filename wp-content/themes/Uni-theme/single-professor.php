@@ -41,8 +41,9 @@ while (have_posts()) {
               )
             )
           ));
+          //data-like: when we add like, we get that like ID, so that we can delete it
           ?>
-          <span class="like-box" data-exists="<?php echo $existsStatus ?>" data-professor="<?php the_ID(); ?>">
+          <span class="like-box" data-exists="<?php echo $existsStatus ?>" data-professor="<?php the_ID(); ?>" data-like="<?php echo $existsQuery->posts[0]->ID  ?>">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
             <i class="fa fa-heart" aria-hidden="true"></i>
             <span class="like-count"><?php echo $likeCount->found_posts; ?></span>

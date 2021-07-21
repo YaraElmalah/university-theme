@@ -27,7 +27,7 @@ function createLike($data)
             )
         ));
         if ($existsQuery->found_posts === 0 && get_post_type($professor) === 'professor') {
-            wp_insert_post(array(
+            return    wp_insert_post(array(
                 'post_type' => 'like',
                 'post_status' => 'publish',
                 'meta_input' => array(
@@ -39,7 +39,12 @@ function createLike($data)
         }
     }
 }
-function deleteLike()
+function deleteLike($data)
 {
-    return "You are Deleting a Like Now!";
+    $likedID = sanitize_text_field($data['like']);
+    if (get_current_user_id() == get_post_field('post_author', $likedID) && get_post_type($likedID) === 'like') {
+        return  wp_delete_post($likedID, true); //true to delete this post permanetly 
+    } else {
+        die("You don't have premission to delete this");
+    }
 }
