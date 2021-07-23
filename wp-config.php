@@ -18,19 +18,43 @@
  *
  * @package WordPress
  */
+if (file_exists(dirname(__FILE__) . '/local.php')) {
+    //here we include our credential for the localhost (also we put this file on .gitignore)
+    /**
+     * As Note: Thnik of siteGround as hosting for wordpress
+     * And revise tge Automatic GIT deployment to web host from deploying section on the course to know more about deploying process
+     * Deplying Services: 
+     * - deployhq.com (https://yara-elmalah.deployhq.com/)
+     * - FTPloy (Free but not much features)
+     * - DeployBot (not free)
+     */
+    // ** MySQL settings - You can get this info from your web host ** //
+    /** The name of the database for WordPress */
+    define('DB_NAME', 'test');
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'test');
+    /** MySQL database username */
+    define('DB_USER', 'root');
 
-/** MySQL database username */
-define('DB_USER', 'root');
+    /** MySQL database password */
+    define('DB_PASSWORD', '');
 
-/** MySQL database password */
-define('DB_PASSWORD', '');
+    /** MySQL hostname */
+    define('DB_HOST', 'localhost');
+} else {
+    //here we put our credentials for the live site
+    // ** MySQL settings - You can get this info from your web host ** //
+    /** The name of the database for WordPress */
+    define('DB_NAME', 'live-db');
 
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
+    /** MySQL database username */
+    define('DB_USER', 'real-user');
+
+    /** MySQL database password */
+    define('DB_PASSWORD', '123');
+
+    /** MySQL hostname */
+    define('DB_HOST', 'localhost');
+}
 
 /** Database charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
