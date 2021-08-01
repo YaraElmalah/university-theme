@@ -16,7 +16,7 @@ function university_post_types()
 		'supports' => array('title', 'editor', 'excerpt'),
 		'has_archive' => true,
 		'rewrite' => array('slug' => 'events'),
-		'public' => true, //to be available to everyone to edit
+		'public' => false, //to be available to everyone to edit
 		'labels' => array(
 			'name' => 'Events',
 			'add_new_item' => 'Add New Event',

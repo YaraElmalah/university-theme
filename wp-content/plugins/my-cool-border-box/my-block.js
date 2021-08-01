@@ -3,13 +3,17 @@
  * React ==> we need to change it with wp.element ==> to get the library that the wordpress default library
  * instead of using babel.js, we can use libraties that we use libs, but we need experience on (npm, cli)
  * if we wrote on the console wp.components (we got all the components that Gutenberg provide)
+ * We can put the save method inside the php code creating what called dynamic custom block type
  */
 
 wp.blocks.registerBlockType("yara/border-box", {
   title: "My Cool Border Box",
   icon: "smiley", //Dashicons
   category: "common",
-  attributes: { content: { type: "string" }, color: { type: "string" } }, //our attributes (fields on the block)
+  attributes: {
+    content: { type: "string", source: "post", meta: "author" }, //we should make sure that meta that the js is looking for, exists in the API (we need to register it)
+    color: { type: "string" },
+  }, //our attributes (fields on the block)
   /**
    * We would use babel.js to use jsx to convert html into React
    */
@@ -47,5 +51,6 @@ wp.blocks.registerBlockType("yara/border-box", {
       },
       props.attributes.content
     );
+    // return null; //set this to return false (handle this from backend prespective)
   },
 });

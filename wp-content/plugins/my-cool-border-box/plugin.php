@@ -16,3 +16,10 @@ function loadMyBlockFiles()
 }
 
 add_action('enqueue_block_editor_assets', 'loadMyBlockFiles');
+function register_gutenberg_meta()
+{
+    register_meta('post', 'author', array(
+        'show_in_rest' => true
+    ));
+}
+add_action('init', 'register_gutenberg_meta');
