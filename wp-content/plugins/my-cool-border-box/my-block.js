@@ -11,33 +11,43 @@ wp.blocks.registerBlockType("yara/border-box", {
   icon: "smiley", //Dashicons
   category: "common",
   attributes: {
-    content: { type: "string", source: "post", meta: "author" }, //we should make sure that meta that the js is looking for, exists in the API (we need to register it)
+    content: { type: "string" }, //we should make sure that meta that the js is looking for, exists in the API (we need to register it)
     color: { type: "string" },
   }, //our attributes (fields on the block)
   /**
    * We would use babel.js to use jsx to convert html into React
    */
   edit: function (props) {
-    //backend
     function updateContent(event) {
       props.setAttributes({ content: event.target.value });
     }
+
     function updateColor(value) {
       props.setAttributes({ color: value.hex });
     }
-    return React.createElement(
+
+    return wp.element.createElement(
       "div",
       null,
-      React.createElement("h3", null, "Your Cool Border Box"),
-      React.createElement("input", {
+      wp.element.createElement("h3", null, "Your Cool Border Box"),
+      wp.element.createElement("input", {
         type: "text",
         value: props.attributes.content,
         onChange: updateContent,
       }),
-      /*#__PURE__*/ React.createElement(wp.components.ColorPicker, {
+      wp.element.createElement(wp.components.ColorPicker, {
         color: props.attributes.color,
         onChangeComplete: updateColor,
-      })
+      }),
+      wp.element.createElement(
+        "h3",
+        {
+          style: {
+            color: props.attributes.color,
+          },
+        },
+        "Preview"
+      )
     );
   },
   save: function (props) {
