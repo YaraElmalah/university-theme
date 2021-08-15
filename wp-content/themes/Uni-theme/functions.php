@@ -2,6 +2,13 @@
 //include the search route file
 require_once get_theme_file_path('/inc/search-route.php');
 require_once get_theme_file_path('/inc/like-route.php');
+//Add New Query Var
+add_filter('query_vars', 'marvel_university_query_vars');
+function marvel_university_query_vars($vars)
+{
+	$vars[] = 'skyColor';
+	return $vars;
+}
 //Page Banner function
 function pageBanner($args = NULL)
 {
